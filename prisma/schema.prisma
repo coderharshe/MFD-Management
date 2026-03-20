@@ -1,0 +1,34 @@
+generator client {
+  provider   = "prisma-client-js"
+  engineType = "library"
+}
+
+datasource db {
+  provider  = "postgresql"
+}
+
+model User {
+  id        String   @id @default(uuid()) // Can map to Supabase auth.users ID
+  email     String   @unique
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model CasUpload {
+  id          String   @id @default(uuid())
+  user_id     String
+  file_url    String
+  uploaded_at DateTime @default(now())
+}
+
+model Portfolio {
+  id              String   @id @default(uuid())
+  user_id         String
+  fund_name       String
+  folio           String
+  units           String
+  invested_amount String
+  current_value   String
+  created_at      DateTime @default(now())
+}
